@@ -1,0 +1,3 @@
+{
+  "RE_ROCKET_PUNCH.description": "{Damage:diff()}ダメージを与える。\nカードを{Cards:diff()}枚引く。\n状態異常を作成するたび、プレイするまでこのカードのコストは0{energyPrefix:energyIcons(1)}。"
+}

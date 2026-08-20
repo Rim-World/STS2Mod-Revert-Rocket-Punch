@@ -1,0 +1,3 @@
+{
+  "RE_ROCKET_PUNCH.description": "{Damage:diff()} hasar ver.\n{Cards:diff()} {Cards:plural:kart|kart} çek.\nHer Durum kartı oluşturduğunda bu kartın maliyeti, oynanana kadar 0 {energyPrefix:energyIcons(1)} olur."
+}

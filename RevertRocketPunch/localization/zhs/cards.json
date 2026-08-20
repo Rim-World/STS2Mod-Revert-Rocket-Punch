@@ -1,0 +1,3 @@
+{
+  "RE_ROCKET_PUNCH.description": "造成{Damage:diff()}点伤害。\n抽{Cards:diff()}张牌。\n每当你生成状态牌时，此牌的耗能将在下一次打出前降为0{energyPrefix:energyIcons(1)}。"
+}

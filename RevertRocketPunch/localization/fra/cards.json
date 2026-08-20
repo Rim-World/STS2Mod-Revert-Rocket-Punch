@@ -1,0 +1,3 @@
+{
+  "RE_ROCKET_PUNCH.description": "Infligez {Damage:diff()} dégâts.\nPiochez {Cards:diff()} {Cards:plural:carte|cartes}.\nLorsque vous créez une carte Statut, réduisez le coût de cette carte à 0 {energyPrefix:energyIcons(1)} jusqu'à ce qu'elle soit jouée."
+}

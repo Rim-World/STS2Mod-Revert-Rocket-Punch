@@ -1,0 +1,3 @@
+{
+  "RE_ROCKET_PUNCH.description": "Наносит {Damage:diff()} урона.\nВы добираете {Cards:diff()} {Cards:plural(ru):карту|карты|карт}.\nСтоимость понижается до 0 {energyPrefix:energyIcons(1)} на одно разыгрывание, когда вы создаете Статус."
+}

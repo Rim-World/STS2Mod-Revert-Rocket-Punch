@@ -1,0 +1,3 @@
+{
+  "RE_ROCKET_PUNCH.description": "Zadaj {Damage:diff()} pkt. obrażeń.\nDobierz {Cards:diff()} {Cards:plural:kartę|karty|kart}.\nKiedykolwiek stworzysz kartę Stanu, zredukuj koszt tej karty do 0 {energyPrefix:energyIcons(1)} aż do zagrania."
+}

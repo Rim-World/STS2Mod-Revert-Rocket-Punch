@@ -1,0 +1,3 @@
+{
+  "RE_ROCKET_PUNCH.description": "Deal {Damage:diff()} damage.\nDraw {Cards:diff()} {Cards:plural:card|cards}.\nWhenever you create a Status, reduce this card's cost to 0 {energyPrefix:energyIcons(1)} until played."
+}

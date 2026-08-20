@@ -1,0 +1,3 @@
+{
+  "RE_ROCKET_PUNCH.description": "Cause {Damage:diff()} de dano.\nCompre {Cards:diff()} {Cards:plural:carta|cartas}.\nQuando você criar uma carta de Condição, reduza o custo desta carta para 0 {energyPrefix:energyIcons(1)} até que seja jogada."
+}

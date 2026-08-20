@@ -1,0 +1,3 @@
+{
+  "RE_ROCKET_PUNCH.description": "造成 {Damage:diff()} 點傷害。\n抽 {Cards:diff()} 張牌。\n每當你創造一張狀態牌時，使此牌耗能降為 0 {energyPrefix:energyIcons(1)}，直到打出為止。"
+}

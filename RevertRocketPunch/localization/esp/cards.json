@@ -1,0 +1,3 @@
+{
+  "RE_ROCKET_PUNCH.description": "Infliges {Damage:diff()} de daño.\nRobas {Cards:diff()} {Cards:plural:carta|cartas}.\nAl crear una carta de estado, se reduce el costo de esta carta a 0 {energyPrefix:energyIcons(1)} hasta que se juegue."
+}

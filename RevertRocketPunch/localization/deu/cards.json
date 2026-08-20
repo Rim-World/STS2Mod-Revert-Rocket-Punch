@@ -1,0 +1,3 @@
+{
+  "RE_ROCKET_PUNCH.description": "Füge {Damage:diff()} Schaden zu.\nZiehe {Cards:diff()} {Cards:plural:Karte|Karten}.\nImmer wenn du einen Status erzeugst, senke die Kosten dieser Karte auf 0 {energyPrefix:energyIcons(1)}, bis du sie spielst."
+}

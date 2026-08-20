@@ -1,0 +1,3 @@
+{
+  "RE_ROCKET_PUNCH.description": "สร้างความเสียหาย {Damage:diff()}\nจั่วการ์ด {Cards:diff()} ใบ\nทุกครั้งที่คุณสร้างการ์ดสถานะ ลดค่าร่ายการ์ดนี้เหลือ 0 {energyPrefix:energyIcons(1)} จนกว่าจะถูกเล่น"
+}

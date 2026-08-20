@@ -1,0 +1,12 @@
+{
+  "id": "RevertRocketPunch",
+  "name": "回调火箭飞拳（RevertRocketPunch）",
+  "author": "再玩小卡组找人弄你",
+  "description": "将故障机器人的「火箭飞拳」回调至 v0.110 之前的效果：每当你生成状态牌时，此牌的耗能将在下一次打出前降为 0（而非减少 1）。",
+  "version": "1.0",
+  "has_pck": true,
+  "has_dll": true,
+  "min_game_version": "0.107.0",
+  "dependencies": [],
+  "affects_gameplay": true
+}
