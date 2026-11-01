@@ -8,6 +8,7 @@
 
 - 仓库整理为 AGENTS 十目录结构（`1.ADR` / `2.PLANS` / `3.DOCS` / `4.SDD` / `5.ChangeLog` / `9.SRC` / `10.OUTPUT` / `PRIVACY` / `TMP` / `TOOLS`），补全 README、CHANGELOG、SDD、版本日志与索引文档。
 - 文档重命名为三位编号中文文件名；源码与 mod 清单内容保持不变。
+- 仓库整理提交：`c0cfbf7`。
 
 ## [1.0] - 2026-08-21
 
