@@ -15,3 +15,8 @@
 - `01-旧Git仓库/RevertRocketPunch.git` 在确认远端历史完整（`git log` 含 726e54a / 199887f / 06d99d2）后可删除；目前建议保留。
 - `9.SRC/RevertRocketPunch/.godot/` 是 Godot 导入缓存，体积会随构建增长；需要时可在 Godot 编辑器内删除后重新导入。
 - 本目录除 `TMP.md` 外全部被 `.gitignore` 排除，不会入库。
+
+## 2026-11-01 清理记录
+
+- `TMP/01-旧Git仓库/` 与 `TMP/02-缓存与临时/` 的内容已全部移入 Windows 回收站。
+- 清理依据：远端仓库已完整保留历史，构建缓存可再生；需要回滚时从远端 `git log` 或 `10.OUTPUT/` 取回。
