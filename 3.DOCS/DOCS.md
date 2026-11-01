@@ -7,7 +7,7 @@
 
 # 参考库
 
-以下参考库位于本机 `C:\Users\13167\Desktop\Mod\STS2-Reference\`，不在本仓库内：
+以下参考库位于本机 `C:\Users\<用户名>\Desktop\Mod\STS2-Reference\`，不在本仓库内：
 
 - `0.STS1-Reference\`：杀戮尖塔 1 参考库（V2.3.4，Java/libGDX 引擎）：24 语言 × 17 表本地化 + CFR 反编译 Java 源码（4874 文件）+ 423 卡索引 + 提取脚本。
 - `1.STS2-107Reference\`：v0.107.1 卡牌参考库（14 语言全量本地化表 + 107 反编译效果源码 + 全卡索引 + 解包脚本，见 ADR-003；其中 `localization/ind`、`localization/zht` 为 111 残留已标注）。
