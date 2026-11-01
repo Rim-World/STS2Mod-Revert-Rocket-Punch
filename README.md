@@ -1,63 +1,79 @@
-English | [中文](README.zh.md)
+# STS2Mod-回调飞拳（RevertRocketPunch）
 
-# If you like this mod, welcome to check out my other mods. They might be helpful to you.
+把《杀戮尖塔 2》故障机器人的「火箭飞拳」回调为 v0.110 之前的版本：每当你生成状态牌时，此牌的耗能将在下一次打出前降为 0，而不是减少 1。
 
-## 1\. Effects
+An STS2 mod that reverts Defect's "Rocket Punch" to its pre-v0.110 behavior: whenever you create a Status, this card's cost becomes 0 until played, instead of being reduced by 1.
 
-Reverts the effect of the "Rocket Punch" card from the v0.111 version's "Whenever you create a Status, reduce this card's cost by 1" back to the pre-v0.110 version's "Whenever you create a Status, reduce this card's cost to 0".
+## 功能
 
-All other effects remain unchanged: 2 cost Attack, deals 13 damage (14 on upgrade), draws 1 card (2 on upgrade); the card text is restored to the old wording, and the card art is unchanged.
+- **效果回调**：`RocketPunch.AfterCardGeneratedForCombat` 被补丁接管，命中「牌主生成状态牌」后执行 `EnergyCost.SetUntilPlayed(0)`，与 v0.107.1 原版语义一致。
+- **文本回调**：卡面描述切换到模组专属键 `RE_ROCKET_PUNCH.description`，提供 15 种语言；`ind` 不替换，保持官方 111 文案。
+- **不新增卡牌**：直接修改原卡的行为与描述，卡名、卡图、数值（2 费攻击、13(+1) 伤害、抽 1(+1) 张）不变。
+- **自动降级**：游戏版本低于 0.110 或卡牌缺失时不介入，不报错、不崩溃。
 
-This mod works by modifying the original "Rocket Punch" card directly, rather than creating a new card and disabling the old one.
+## 兼容性
 
-## 2\. Impact (Based on My Understanding of the Game)
+| 项 | 说明 |
+|---|---|
+| 游戏版本 | `min_game_version = 0.107.0`；补丁仅在 `SemVer.Major == 0 && Minor >= 110` 时启用 |
+| 依赖 | 无。`0Harmony` 与 `sts2.dll` 仅作编译期引用（`Private=false`） |
+| 其他 mod | 不与覆写官方 `ROCKET_PUNCH.description` 键的 mod 抢键；不保证与盗版/修改版/移动版/老旧版本的兼容性 |
 
-Before version v0.110.0, Rocket Punch was a strong transitional/final engine piece that you could practically take one of without a second thought. As long as you had a card that generated a Status card, there was a more than 50% chance that you could play it for 0 Energy, and starting from the second reshuffle, you could almost consistently play it for 0 Energy.
+## 安装
 
-However, the changes in version v0.110.0 significantly weakened it. Not only was its role as an early-game transitional card greatly diminished, but even when used as a core engine piece later in a run, you now have to pay considerably more attention to the order in which you play your cards, which feels rather awkward.
+1. 安装并启用游戏 mod 加载器（游戏自带的 mods 目录机制）。
+2. 把 `RevertRocketPunch/` 目录（含 `RevertRocketPunch.dll`、`RevertRocketPunch.pck`、`RevertRocketPunch.json`）放入 `<游戏目录>/mods/`。
+3. 启动游戏，在 mods 菜单中启用本 mod。
 
-Save File Impact:While this mod is enabled, the "Rocket Punch" card description in the History will be displayed using the reverted wording. Disabling the mod will restore the original description.
+发布包见 [Releases](https://github.com/Rim-World/STS2Mod-Revert-Rocket-Punch/releases)。
 
-## 3\. Environment & Version
+## 构建
 
-This mod does not depend on any base mod.
+前置：.NET 9 SDK、Godot 4.5.1 mono、本机已安装《杀戮尖塔 2》（提供 `sts2.dll` 与 `0Harmony.dll` 引用）。
 
-This mod takes effect on 0.110.0 or later (it is active on the current 0.111.0);
+```powershell
+cd 9.SRC/RevertRocketPunch
+./build.ps1
+```
 
-it disables itself automatically on 0.099.x–0.109.x, because Rocket Punch in the version range already has the target effect and needs no modification.
+脚本依次执行 `dotnet build -c Debug` → Godot `--headless --import` → `--export-pack "Windows Desktop"` → 拷贝 dll/pdb/json 到 `C:/Game/Steam/steamapps/common/Slay the Spire 2/mods/RevertRocketPunch/`。路径均在 `build.ps1` 顶部与 `RevertRocketPunch.csproj` 的 `Sts2Path` 中配置。
 
-At runtime, the mod checks the current game version and whether the Rocket Punch card exists in the game package: if the version is below 0.110 or the card has been removed, the mod simply does not take effect, without errors or crashes.
+## 目录结构
 
-In theory, as long as there are no major API updates or card changes, this mod should automatically adapt to new versions without any modification.
+```
+STS2Mod-回调飞拳/
+├── 1.ADR/          架构决策记录与索引 ADR.md
+├── 2.PLANS/        施工计划与索引 PLANS.md
+├── 3.DOCS/         调研与知识文档，索引 DOCS.md
+├── 4.SDD/          软件设计文档，索引 SDD.md
+├── 5.ChangeLog/    分版本变更日志，索引 ChangeLog.md
+├── 9.SRC/          源码（Godot/C# 工程 RevertRocketPunch）
+├── 10.OUTPUT/      构建产物与发布包（output.md 索引，其余不入库）
+├── PRIVACY/        机密信息（PRIVACY.md 索引，不入库）
+├── TMP/            临时与过程文件（TMP.md 索引，其余不入库）
+├── TOOLS/          自写脚本，TOOLS.md 索引
+├── description/    创意工坊/发布文案（中/英）
+└── pics/           封面与附加截图
+```
 
-## 4\. Language Support
+## 文档索引
 
-The card text provided by this mod covers 15 languages: deu / eng / esp / fra / ita / jpn / kor / pol / ptb / rus / spa / tha / tur / zhs / zht.
+- [ADR 索引](1.ADR/ADR.md) — 三篇决策记录：补丁策略、ModelDb 访问时机、107 参考库与文本对齐
+- [计划索引](2.PLANS/PLANS.md) — 火箭飞拳回调施工计划与施工记录
+- [知识索引](3.DOCS/DOCS.md) — 版本差异证据、运行时初始化时序
+- [设计文档](4.SDD/001-总体设计.md) — 模块划分、补丁策略、数据流、异常处理、构建与测试
+- [版本日志](5.ChangeLog/ChangeLog.md)（单文件版见 [CHANGELOG.md](CHANGELOG.md)）
+- [工具索引](TOOLS/TOOLS.md) — 本地化与占位图生成脚本
 
-14 of these languages match the official v0.107.1 text exactly; zht (Traditional Chinese) is based on the official v0.111.0 Traditional Chinese text with modifications, since v0.107 did not provide Traditional Chinese.
+## 版本
 
-For languages not provided by v0.107 (i.e., ind), the description is not replaced and the official v0.111 text is kept, but the card effect is still replaced; no errors are raised.
+当前版本 **1.0**，详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 
-## 5\. Implementation & Compatibility
+## 致谢
 
-This mod is written with minimal dependencies, so under normal circumstances it is compatible with most mods and unlikely to break as the game version changes.
+- 感谢《杀戮尖塔 2》制作组对 mod 生态的支持，以及 Baselib 作者提供的文档。
+- 本 mod 使用 Opencode + DeepSeek V4 Flash（0731 GA）完成。
 
-This mod uses external patches to hard-code the card text (description) and the cost-reduction trigger of Rocket Punch to their pre-v0.110 versions; the card name remains official, and nothing else is hard-coded.
+## 开源地址
 
-The mod works in the same way across all supported game versions.
-
-However, compatibility is not guaranteed with pirated copies, modified versions, mobile versions, outdated versions, niche mods, or secondary mods.
-
-## 6\. Credits
-
-This mod was made with Opencode + DeepSeek V4 Flash (0731 GA). Thanks to Saint Liang.
-
-Thanks to the Slay the Spire 2 team for their efforts to make modding easier for players.
-
-Thanks to the Baselib developers for their documentation.
-
-## 7\. Open-Source Repository & Contact
-
-Open-source repository: https://github.com/Rim-World/STS2Mod-Revert-Rocket-Punch
-
-Feel free to leave your comments and feedback in the comment section.
+<https://github.com/Rim-World/STS2Mod-Revert-Rocket-Punch>
