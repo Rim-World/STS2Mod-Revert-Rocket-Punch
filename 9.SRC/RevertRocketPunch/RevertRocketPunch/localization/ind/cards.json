@@ -1,0 +1,3 @@
+{
+  "RE_ROCKET_PUNCH.description": "Lakukan {Damage:diff()} kerusakan.\nAmbil {Cards:diff()} {Cards:plural:kartu|kartu}.\nSetiap kali kamu membuat kartu Status, harga kartu ini menjadi 0 {energyPrefix:energyIcons(1)} sampai dimainkan."
+}

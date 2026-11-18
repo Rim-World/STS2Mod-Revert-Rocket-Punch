@@ -7,7 +7,7 @@ An STS2 mod that reverts Defect's "Rocket Punch" to its pre-v0.110 behavior: whe
 ## 功能
 
 - **效果回调**：`RocketPunch.AfterCardGeneratedForCombat` 被补丁接管，命中「牌主生成状态牌」后执行 `EnergyCost.SetUntilPlayed(0)`，与 v0.107.1 原版语义一致。
-- **文本回调**：卡面描述切换到模组专属键 `RE_ROCKET_PUNCH.description`，提供 15 种语言；`ind` 不替换，保持官方 111 文案。
+- **文本回调**：卡面描述切换到模组专属键 `RE_ROCKET_PUNCH.description`，提供 16 种语言（含 `ind`）；`ara` 使用 0.113.1 官方文本，官方文本已经写「降为 0」。
 - **不新增卡牌**：直接修改原卡的行为与描述，卡名、卡图、数值（2 费攻击、13(+1) 伤害、抽 1(+1) 张）不变。
 - **自动降级**：游戏版本低于 0.110 或卡牌缺失时不介入，不报错、不崩溃。
 
@@ -15,9 +15,13 @@ An STS2 mod that reverts Defect's "Rocket Punch" to its pre-v0.110 behavior: whe
 
 | 项 | 说明 |
 |---|---|
-| 游戏版本 | `min_game_version = 0.107.0`；补丁仅在 `SemVer.Major == 0 && Minor >= 110` 时启用 |
+| 游戏版本 | 正式版 0.111.1、beta 版 0.113.1；`min_game_version = 0.107.0` |
+| 生效范围 | 仅 `SemVer.Major == 0 && Minor >= 110` 时启用；0.107–0.109 保持原版 |
+| 发布 DLL | 以 0.111.1 程序集编译，同一份 DLL 在 0.113.1 运行 |
 | 依赖 | 无。`0Harmony` 与 `sts2.dll` 仅作编译期引用（`Private=false`） |
 | 其他 mod | 不与覆写官方 `ROCKET_PUNCH.description` 键的 mod 抢键；不保证与盗版/修改版/移动版/老旧版本的兼容性 |
+
+兼容性证据见 [003-E](3.DOCS/003-E-111.1与113.1兼容性核验.md)。
 
 ## 安装
 
@@ -36,38 +40,52 @@ cd 9.SRC/RevertRocketPunch
 ./build.ps1
 ```
 
-脚本依次执行 `dotnet build -c Debug` → Godot `--headless --import` → `--export-pack "Windows Desktop"` → 拷贝 dll/pdb/json 到 `C:/Game/Steam/steamapps/common/Slay the Spire 2/mods/RevertRocketPunch/`。路径均在 `build.ps1` 顶部与 `RevertRocketPunch.csproj` 的 `Sts2Path` 中配置。
+脚本先运行 `8.TEST/CI-CD/verify-version.ps1`，再执行 `dotnet build -c Debug` → Godot `--headless --import` → `--export-pack "Windows Desktop"` → 拷贝 dll/pdb/json 到 `C:/Game/Steam/steamapps/common/Slay the Spire 2/mods/RevertRocketPunch/`。
+
+发布构建应使用 0.111.1 程序集：
+
+```powershell
+./build.ps1 -Sts2DataDir "C:/path/to/0.111.1/refs"
+```
+
+`-Sts2DataDir` 目录必须同时包含 `sts2.dll` 与 `0Harmony.dll`。默认路径在 `build.ps1` 顶部与 `RevertRocketPunch.csproj` 的 `Sts2Path` 中配置。
 
 ## 目录结构
 
 ```
 STS2Mod-回调飞拳/
-├── 1.ADR/          架构决策记录与索引 ADR.md
-├── 2.PLANS/        施工计划与索引 PLANS.md
-├── 3.DOCS/         调研与知识文档，索引 DOCS.md
-├── 4.SDD/          软件设计文档，索引 SDD.md
-├── 5.ChangeLog/    分版本变更日志，索引 ChangeLog.md
+├── 1.PRD/          需求与验收（PRD.md；用户prompt/ 不入库）
+├── 2.PLANS/        施工计划（PLANS.md）
+├── 3.DOCS/         调研、证据与知识（DOCS.md）
+├── 4.ADR/          架构决策记录（ADR.md）
+├── 5.SDD/          软件设计文档（SDD.md）
+├── 6.SPEC/         对外规范与追溯（SPEC.md）
+├── 7.ChangeLog/    分版本变更日志（ChangeLog.md）
+├── 8.TEST/         测试工件、探针与门禁（TEST.md）
 ├── 9.SRC/          源码（Godot/C# 工程 RevertRocketPunch）
-├── 10.OUTPUT/      构建产物与发布包（output.md 索引，其余不入库）
-├── PRIVACY/        机密信息（PRIVACY.md 索引，不入库）
-├── TMP/            临时与过程文件（TMP.md 索引，其余不入库）
-├── TOOLS/          自写脚本，TOOLS.md 索引
+├── 10.OUTPUT/      构建产物与发布包（OUTPUT.md；其余不入库）
+├── PRIVACY/        机密信息（PRIVACY.md，不入库）
+├── TMP/            临时与过程文件（TMP.md；其余不入库）
+├── TOOLS/          自写脚本（TOOLS.md）
 ├── description/    创意工坊/发布文案（中/英）
 └── pics/           封面与附加截图
 ```
 
 ## 文档索引
 
-- [ADR 索引](1.ADR/ADR.md) — 三篇决策记录：补丁策略、ModelDb 访问时机、107 参考库与文本对齐
-- [计划索引](2.PLANS/PLANS.md) — 火箭飞拳回调施工计划与施工记录
-- [知识索引](3.DOCS/DOCS.md) — 版本差异证据、运行时初始化时序
-- [设计文档](4.SDD/001-总体设计.md) — 模块划分、补丁策略、数据流、异常处理、构建与测试
-- [版本日志](5.ChangeLog/ChangeLog.md)（单文件版见 [CHANGELOG.md](CHANGELOG.md)）
+- [需求索引](1.PRD/PRD.md) — RQ-001 至 RQ-009
+- [计划索引](2.PLANS/PLANS.md) — 火箭飞拳回调、双版本兼容、文件体系迁移
+- [知识索引](3.DOCS/DOCS.md) — 版本差异、运行时初始化、0.111.1/0.113.1 核验
+- [ADR 索引](4.ADR/ADR.md) — 补丁策略、ModelDb 访问时机、107 参考库、兼容基线
+- [设计文档](5.SDD/001-总体设计.md) — 组件边界、依赖方向、流程、降级、需求追溯
+- [SPEC](6.SPEC/SPEC.md) — SP-001 至 SP-018
+- [版本日志](7.ChangeLog/ChangeLog.md)（单文件版见 [CHANGELOG.md](CHANGELOG.md)）
+- [测试索引](8.TEST/TEST.md) — 探针、场景、日志与版本门禁
 - [工具索引](TOOLS/TOOLS.md) — 本地化与占位图生成脚本
 
 ## 版本
 
-当前版本 **1.0**，详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+当前版本 **1.1.0**，详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 致谢
 

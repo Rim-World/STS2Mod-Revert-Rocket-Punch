@@ -1,3 +1,7 @@
+param(
+    [string]$Sts2DataDir
+)
+
 $ErrorActionPreference = 'Stop'
 
 $root = $PSScriptRoot
@@ -6,8 +10,15 @@ $godot = 'C:\Godot&GDRE\Godot_v4.5.1-stable_mono_win64\Godot_v4.5.1-stable_mono_
 $modId = 'RevertRocketPunch'
 $modOut = Join-Path $game "mods\$modId"
 
+Write-Host '==> Verify version consistency'
+$versionGate = Join-Path $root '..\..\8.TEST\CI-CD\verify-version.ps1'
+if (-not (Test-Path $versionGate)) { throw "Version gate not found: $versionGate" }
+& $versionGate
+
 Write-Host '==> Build .NET assembly'
-dotnet build (Join-Path $root "$modId.csproj") -c Debug -p:NuGetAudit=false
+$buildArgs = @((Join-Path $root "$modId.csproj"), '-c', 'Debug', '-p:NuGetAudit=false')
+if ($Sts2DataDir) { $buildArgs += "-p:Sts2DataDir=$Sts2DataDir" }
+dotnet build @buildArgs
 if ($LASTEXITCODE -ne 0) { throw 'dotnet build failed' }
 
 $dll = Join-Path $root '.godot\mono\temp\bin\Debug\RevertRocketPunch.dll'

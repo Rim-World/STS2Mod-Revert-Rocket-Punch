@@ -4,7 +4,7 @@ English | [中文](README.zh.md)
 
 ## 1\. Effects
 
-Reverts the effect of the "Rocket Punch" card from the v0.111 version's "Whenever you create a Status, reduce this card's cost by 1" back to the pre-v0.110 version's "Whenever you create a Status, reduce this card's cost to 0".
+Reverts the effect of the "Rocket Punch" card from v0.110+'s "Whenever you create a Status, reduce this card's cost by 1" back to the pre-v0.110 version's "Whenever you create a Status, reduce this card's cost to 0".
 
 All other effects remain unchanged: 2 cost Attack, deals 13 damage (14 on upgrade), draws 1 card (2 on upgrade); the card text is restored to the old wording, and the card art is unchanged.
 
@@ -22,7 +22,7 @@ Save File Impact:While this mod is enabled, the "Rocket Punch" card description 
 
 This mod does not depend on any base mod.
 
-This mod takes effect on 0.110.0 or later (it is active on the current 0.111.0);
+This mod takes effect on 0.110.0 or later. It is active on 0.111.1 (release) and 0.113.1 (beta); the same DLL works on both.
 
 it disables itself automatically on 0.099.x–0.109.x, because Rocket Punch in the version range already has the target effect and needs no modification.
 
@@ -32,11 +32,11 @@ In theory, as long as there are no major API updates or card changes, this mod s
 
 ## 4\. Language Support
 
-The card text provided by this mod covers 15 languages: deu / eng / esp / fra / ita / jpn / kor / pol / ptb / rus / spa / tha / tur / zhs / zht.
+The card text provided by this mod covers 16 languages: deu / eng / esp / fra / ind / ita / jpn / kor / pol / ptb / rus / spa / tha / tur / zhs / zht.
 
 14 of these languages match the official v0.107.1 text exactly; zht (Traditional Chinese) is based on the official v0.111.0 Traditional Chinese text with modifications, since v0.107 did not provide Traditional Chinese.
 
-For languages not provided by v0.107 (i.e., ind), the description is not replaced and the official v0.111 text is kept, but the card effect is still replaced; no errors are raised.
+`ind` is newly provided in 1.1.0 and says the cost becomes 0. `ara` is not replaced: the official 0.113.1 Arabic text already says the cost becomes 0. No errors are raised.
 
 ## 5\. Implementation & Compatibility
 

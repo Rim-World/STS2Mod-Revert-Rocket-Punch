@@ -28,7 +28,7 @@ public static class RocketPunchDescriptionPatch
         string? lang = LocManager.Instance?.Language;
         return lang switch
         {
-            "deu" or "eng" or "esp" or "fra" or "ita" or "jpn" or "kor" or "pol"
+            "deu" or "eng" or "esp" or "fra" or "ind" or "ita" or "jpn" or "kor" or "pol"
                 or "ptb" or "rus" or "spa" or "tha" or "tur" or "zhs" or "zht" => true,
             _ => false,
         };

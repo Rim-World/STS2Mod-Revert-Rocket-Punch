@@ -1,0 +1,7 @@
+# 0.113.1 无头场景：验证火箭飞拳回调
+# 进入战斗后由 RocketPunchProbe 添加火箭飞拳并生成两张状态牌，
+# 探针日志应为 [rp-probe] PASS。
+fight CULTISTS_NORMAL
+wait combat-started
+rpprobe
+wait 3

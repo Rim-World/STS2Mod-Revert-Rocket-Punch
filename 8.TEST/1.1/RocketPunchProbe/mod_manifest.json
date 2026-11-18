@@ -1,0 +1,12 @@
+{
+  "id": "RocketPunchProbe",
+  "name": "Rocket Punch Probe",
+  "author": "local test",
+  "description": "Temporary E2E probe for RevertRocketPunch verification.",
+  "version": "0.0.1",
+  "has_pck": false,
+  "has_dll": true,
+  "affects_gameplay": false,
+  "min_game_version": "0.111.0",
+  "dependencies": []
+}
